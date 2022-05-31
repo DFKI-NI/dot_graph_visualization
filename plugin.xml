@@ -1,0 +1,17 @@
+<library path="src">
+
+  <class name="PlanVisualization" type="plan_visualization.plan_visualization.PlanVisualization" base_class_type="rqt_gui_py::Plugin">
+    <description>
+      Visualizes a plan received as a DOT graph.
+    </description>
+    <qtgui>
+      <group>
+        <label>Visualization</label>
+      </group>
+      <label>Plan Visualization</label>
+      <icon type="theme">applications-science</icon>
+      <statustip>Plan Visualization</statustip>
+    </qtgui>
+  </class>
+
+</library>
