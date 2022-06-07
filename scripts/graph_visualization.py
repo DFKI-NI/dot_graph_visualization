@@ -5,4 +5,4 @@ import sys
 from rqt_gui.main import Main
 
 main = Main()
-sys.exit(main.main(sys.argv, standalone='plan_visualization'))
+sys.exit(main.main(sys.argv, standalone='dot_graph_visualization'))

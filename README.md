@@ -1,4 +1,4 @@
-# plan_visualization
+# dot_graph_visualization
 
 A rqt plugin to visualize dot graphs.
 
@@ -6,14 +6,14 @@ A rqt plugin to visualize dot graphs.
 
 To run the plugin use:
 
-    rqt --standalone plan_visualization
+    rqt --standalone dot_graph_visualization
 
 or:
 
-    rqt --standalone plan_visualization.plan_visualization.PlanVisualization
+    rqt --standalone dot_graph_visualization.dot_graph_visualization.DotGraphVisualization
 
 Additionally you can call the script using:
 
-    rosrun plan_visualization plan_viz.py
+    rosrun dot_graph_visualization graph_visualization.py
 
 This is helpful if you want to include it into a launch file.

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>plan_visualization</name>
+  <name>dot_graph_visualization</name>
   <version>0.0.0</version>
-  <description>The plan_visualization package</description>
+  <description>The dot_graph_visualization package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

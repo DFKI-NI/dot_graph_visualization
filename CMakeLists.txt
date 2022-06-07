@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(plan_visualization)
+project(dot_graph_visualization)
 
 find_package(catkin REQUIRED)
 catkin_package()

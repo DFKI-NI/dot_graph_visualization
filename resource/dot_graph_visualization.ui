@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PlanVisualization</class>
- <widget class="QWidget" name="PlanVizualization">
+ <widget class="QWidget" name="DotGraphVisualization">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Plan Graph Visualization</string>
+   <string>DOT Graph Visualization</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -40,7 +40,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Plan Topic:</string>
+        <string>Graph Topic:</string>
        </property>
       </widget>
      </item>
@@ -53,7 +53,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>/plan_visualization/plan_graph</string>
+        <string>/dot_graph_visualization/dot_graph</string>
        </property>
        <property name="frame">
         <bool>true</bool>
@@ -553,7 +553,7 @@
   <customwidget>
    <class>DotWidget</class>
    <extends>QWidget</extends>
-   <header>plan_visualization.xdot_qt</header>
+   <header>dot_graph_visualization.xdot_qt</header>
   </customwidget>
  </customwidgets>
  <resources/>

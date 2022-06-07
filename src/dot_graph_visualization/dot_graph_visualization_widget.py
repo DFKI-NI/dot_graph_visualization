@@ -6,7 +6,7 @@ import rospkg
 from std_msgs.msg import String
 
 # reused from ros smach
-from plan_visualization.xdot_qt import DotWidget
+from dot_graph_visualization.xdot_qt import DotWidget
 
 # common imports that work for both versions PyQt4 and PyQt5
 from python_qt_binding import loadUi, QT_BINDING_VERSION
@@ -20,20 +20,20 @@ else:
     raise ValueError('Unsupported Qt version, supported versions: PyQt4, PyQt5')
 
 
-class PlanVisualizationWidget(QWidget):
+class DotGraphVisualizationWidget(QWidget):
 
     def __init__(self, plugin=None):
-        super(PlanVisualizationWidget, self).__init__()
+        super(DotGraphVisualizationWidget, self).__init__()
 
         # Create QWidget
-        ui_file = os.path.join(rospkg.RosPack().get_path('plan_visualization'), 'resource', 'plan_visualization.ui')
+        ui_file = os.path.join(rospkg.RosPack().get_path('dot_graph_visualization'), 'resource', 'dot_graph_visualization.ui')
         loadUi(ui_file, self, {'DotWidget':DotWidget})
-        self.setObjectName('PlanVisualization')
+        self.setObjectName('DotGraphVisualization')
 
         self.refreshButton.clicked[bool].connect(self._handle_refresh_clicked)
         self.saveButton.clicked[bool].connect(self._handle_save_button_clicked)
 
-        self._sub = rospy.Subscriber('/plan_visualization/plan_graph', String, self.planReceivedCallback)
+        self._sub = rospy.Subscriber('/dot_graph_visualization/dot_graph', String, self.planReceivedCallback)
 
         # flag used to zoom out to fit graph the first time it's received
         self.first_time_graph_received = True
@@ -67,12 +67,10 @@ class PlanVisualizationWidget(QWidget):
             self.gen_single_node('Plan received! rendering...')
         # start rendering graph, might take a while depending on the graph size
         self.xdot_widget.set_dotcode(msg.data)
-        if self.first_time_graph_received:
-            # zoom out until graph fits in screen
-            self.xdot_widget.zoom_to_fit()
-            # only zoom to fit for the first graph
-            self.first_time_graph_received = False
+        # update the widget to show the graph
         self.xdot_widget.update()
+        # zoom to fit the graph
+        self.xdot_widget.zoom_to_fit()
         rospy.loginfo('Rendering graph ended !')
 
     def _handle_refresh_clicked(self, checked):
