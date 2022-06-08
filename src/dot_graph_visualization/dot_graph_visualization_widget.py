@@ -65,6 +65,7 @@ class DotGraphVisualizationWidget(QWidget):
         # inform the user his graph is being rendered
         if self.first_time_graph_received:
             self.gen_single_node('Plan received! rendering...')
+            self.first_time_graph_received = False
         # start rendering graph, might take a while depending on the graph size
         self.xdot_widget.set_dotcode(msg.data)
         # update the widget to show the graph
