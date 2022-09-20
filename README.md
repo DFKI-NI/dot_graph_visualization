@@ -1,6 +1,6 @@
 # dot_graph_visualization
 
-A plugin for rqt to visualize DOT graphs. It contains a simple UI, which visualizes a DOT graph sent to the plugin via ROS topic. The graph needs to be sent as a String to the plugin in correct DOT format.
+A plugin for rqt to visualize DOT graphs. It contains a simple UI, which visualizes a DOT graph sent to the plugin via ROS topic. The graph needs to be sent as a `std_msgs/String` to the plugin in correct DOT format.
 
 # Usage
 
