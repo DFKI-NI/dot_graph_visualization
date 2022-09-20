@@ -4,16 +4,13 @@
   <version>0.0.0</version>
   <description>The dot_graph_visualization package</description>
 
-  <!-- One maintainer tag required, multiple allowed, one person per tag -->
-  <!-- Example:  -->
-  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="marcvinci@dfki.de">Marc Vinci</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>BSD</license>
+  <license>LGPLv3</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
