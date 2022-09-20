@@ -33,14 +33,14 @@ class DotGraphVisualizationWidget(QWidget):
         self.refreshButton.clicked[bool].connect(self._handle_refresh_clicked)
         self.saveButton.clicked[bool].connect(self._handle_save_button_clicked)
 
-        self._sub = rospy.Subscriber('/dot_graph_visualization/dot_graph', String, self.planReceivedCallback)
+        self._sub = rospy.Subscriber('/dot_graph_visualization/dot_graph', String, self.graphReceivedCallback)
 
         # flag used to zoom out to fit graph the first time it's received
         self.first_time_graph_received = True
         # to store the graph msg received in callback, later on is used to save the graph if needed
         self.graph = None
         # inform user that no graph has been received by drawing a single node in the rqt
-        self.gen_single_node('no plan received')
+        self.gen_single_node('No graph received!')
 
     def gen_single_node(self, node_text):
         '''
@@ -48,15 +48,15 @@ class DotGraphVisualizationWidget(QWidget):
         return dot code corresponding to a graph of 1 node
         '''
         # generate dot code (of a single node) from received text
-        graph = 'digraph plan {0[ label="' + node_text + '",style=filled,fillcolor=white,fontcolor=black];}'
+        graph = 'digraph "graph" {0[ label="' + node_text + '",style=filled,fillcolor=white,fontcolor=black];}'
         # render single node graph
         self.xdot_widget.set_dotcode(graph)
         # zoom the single node to be clearly visible
         self.xdot_widget.zoom_image(5.0, center=True)
 
-    def planReceivedCallback(self, msg):
+    def graphReceivedCallback(self, msg):
         '''
-        updating plan view
+        updating graph view
         '''
         # save graph in member variable in case user clicks save button later
         self.graph = msg.data
@@ -64,7 +64,7 @@ class DotGraphVisualizationWidget(QWidget):
         rospy.loginfo('Rendering graph started...')
         # inform the user his graph is being rendered
         if self.first_time_graph_received:
-            self.gen_single_node('Plan received! rendering...')
+            self.gen_single_node('Graph received! Rendering...')
             self.first_time_graph_received = False
         # start rendering graph, might take a while depending on the graph size
         self.xdot_widget.set_dotcode(msg.data)
@@ -72,14 +72,14 @@ class DotGraphVisualizationWidget(QWidget):
         self.xdot_widget.update()
         # zoom to fit the graph
         self.xdot_widget.zoom_to_fit()
-        rospy.loginfo('Rendering graph ended !')
+        rospy.loginfo('Rendering graph ended!')
 
     def _handle_refresh_clicked(self, checked):
         '''
         called when the refresh button is clicked
         '''
         self._sub.unregister()
-        self._sub = rospy.Subscriber(self.topicText.text(), String, self.planReceivedCallback)
+        self._sub = rospy.Subscriber(self.topicText.text(), String, self.graphReceivedCallback)
 
     def save_graph(self, full_path):
         '''
@@ -89,19 +89,19 @@ class DotGraphVisualizationWidget(QWidget):
             dot_file = open(full_path,'w')
             dot_file.write(self.graph)
             dot_file.close()
-            rospy.loginfo('graph saved succesfully in %s', full_path)
+            rospy.loginfo('Graph saved succesfully in %s', full_path)
         else:
             # if self.graph is None it will fall in this case
-            rospy.logerr('Could not save Graph: is empty, currently subscribing to: %s, try' +\
-                         ' clicking "Update subscriber" button and make sure graph is published at least one time'\
+            rospy.logerr('Could not save Graph: Graph is empty, currently subscribing to: %s, try' +\
+                         ' clicking "Update subscriber" button and make sure a graph is published at least one time'\
                          , self.topicText.text())
 
     def _handle_save_button_clicked(self, checked):
         '''
         called when the save button is clicked
         '''
-        rospy.loginfo('Saving plan to dot file')
-        fileName = QFileDialog.getSaveFileName(self, 'Save plan to dot file','','Graph xdot Files (*.dot)')
+        rospy.loginfo('Saving graph to dot file')
+        fileName = QFileDialog.getSaveFileName(self, 'Save graph to dot file','','Graph xdot Files (*.dot)')
         if fileName[0] == '':
             rospy.loginfo("User has cancelled saving process")
         else:

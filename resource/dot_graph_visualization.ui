@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PlanVisualization</class>
+ <class>GraphVisualization</class>
  <widget class="QWidget" name="DotGraphVisualization">
   <property name="geometry">
    <rect>
